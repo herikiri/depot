@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-  resources :users
+  concern :reviewable do
+    resources :reviews
+  end
+
+  resources :users, concern: :reviewable
 
   resources :products do 
     get :who_bought, on: :member
